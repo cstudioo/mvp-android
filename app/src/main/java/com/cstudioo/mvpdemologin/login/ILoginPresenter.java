@@ -6,5 +6,5 @@ package com.cstudioo.mvpdemologin.login;
 
 public interface ILoginPresenter {
 
-    void login(String userName, String passWord);
+    void callLogin(String userName, String passWord);
 }

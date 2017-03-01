@@ -13,7 +13,7 @@ import retrofit2.http.POST;
 
 public interface ServiceInterface {
 
-    static final String LOGIN = "login";
+    static final String LOGIN = "callLogin";
 
     @POST(LOGIN)
     Call<ResponseLogin> login(@Body Login loginCall);

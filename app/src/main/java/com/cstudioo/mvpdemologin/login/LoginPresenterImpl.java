@@ -20,7 +20,7 @@ public class LoginPresenterImpl implements ILoginPresenter {
 
 
     @Override
-    public void login(String username, String password) {
+    public void callLogin(String username, String password) {
         mILoginView.showLoading();
         mILoginInteractor.login(username, password, new ILoginInteractor.IValidationErrorListener() {
             @Override

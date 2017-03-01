@@ -108,7 +108,7 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
 
                 if (etEmail != null && etPassword != null) {
                     if (Utils.isNetworkAvailable(LoginActivity.this)) {
-                        mPresenter.login(etEmail.getText().toString(), etPassword.getText().toString());
+                        mPresenter.callLogin(etEmail.getText().toString(), etPassword.getText().toString());
                     } else {
                         Utils.displayCommonAlertDialog(LoginActivity.this, LoginActivity.this.getResources().getString(R.string.connection_issue_msg));
                     }
