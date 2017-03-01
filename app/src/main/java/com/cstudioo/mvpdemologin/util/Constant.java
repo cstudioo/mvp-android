@@ -7,7 +7,7 @@ package com.cstudioo.mvpdemologin.util;
 public class Constant {
 
 
-    public static final String WS_URL = "https://yourlocalgreengrocer.com.au/api/";
+    public static final String WS_URL = "https://cstudioo.000webhostapp.com/cstudio/";
 
 
 
