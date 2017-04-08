@@ -1,5 +1,6 @@
 package com.cstudioo.mvpdemologin.login;
 
+import com.cstudioo.mvpdemologin.util.ErrorCode;
 import com.cstudioo.mvpdemologin.webservice.model.response.ResponseLogin;
 
 /**
@@ -10,9 +11,9 @@ public interface ILoginView {
 
     void showLoading();
     void hideLoading();
-    void setEmailError(int errRes);
-    void setPasswordError(int errRes);
+    void setEmailError(ErrorCode code);
+    void setPasswordError(ErrorCode code);
     void loginSuccess(ResponseLogin user);
-    void loginFailure(int errMsg);
+    void loginFailure(ErrorCode code);
     void loginFailure(String errMsg);
 }

@@ -1,6 +1,6 @@
 package com.cstudioo.mvpdemologin.login;
 
-import com.cstudioo.mvpdemologin.R;
+import com.cstudioo.mvpdemologin.util.ErrorCode;
 import com.cstudioo.mvpdemologin.webservice.model.response.ResponseLogin;
 
 /**
@@ -24,15 +24,15 @@ public class LoginPresenterImpl implements ILoginPresenter {
         mILoginView.showLoading();
         mILoginInteractor.login(username, password, new ILoginInteractor.IValidationErrorListener() {
             @Override
-            public void emailError(int msg) {
+            public void emailError(ErrorCode code) {
                 mILoginView.hideLoading();
-                mILoginView.setEmailError(msg);
+                mILoginView.setEmailError(code);
             }
 
             @Override
-            public void passwordError(int msg) {
+            public void passwordError(ErrorCode code) {
                 mILoginView.hideLoading();
-                mILoginView.setPasswordError(msg);
+                mILoginView.setPasswordError(code);
             }
 
         }, new ILoginInteractor.IOnLoginFinishedListener() {
@@ -42,15 +42,16 @@ public class LoginPresenterImpl implements ILoginPresenter {
                 if (user != null) {
                     mILoginView.loginSuccess(user);
                 } else {
-                    mILoginView.loginFailure(R.string.activity_login_fail_msg);
+                    mILoginView.loginFailure(ErrorCode.LOGIN_FAILED);
                 }
             }
 
             @Override
-            public void errorMsg(String msg) {
+            public void errorMsg(String errorMsg) {
                 mILoginView.hideLoading();
-                mILoginView.loginFailure(msg);
+                mILoginView.loginFailure(errorMsg);
             }
+
         });
     }
 }

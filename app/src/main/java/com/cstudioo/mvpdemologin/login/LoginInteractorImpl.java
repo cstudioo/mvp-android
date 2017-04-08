@@ -2,7 +2,7 @@ package com.cstudioo.mvpdemologin.login;
 
 import android.text.TextUtils;
 
-import com.cstudioo.mvpdemologin.R;
+import com.cstudioo.mvpdemologin.util.ErrorCode;
 import com.cstudioo.mvpdemologin.util.Utils;
 import com.cstudioo.mvpdemologin.webservice.APIError;
 import com.cstudioo.mvpdemologin.webservice.ErrorUtils;
@@ -60,22 +60,22 @@ public class LoginInteractorImpl implements ILoginInteractor {
 
         if (TextUtils.isEmpty(userName)) {
 
-            validationErrorListener.emailError(R.string.activity_login_enter_email);
+            validationErrorListener.emailError(ErrorCode.ENTER_EMAIL);
             return false;
 
         } else if(!Utils.isValidEmail(userName)){
 
-            validationErrorListener.emailError(R.string.activity_login_email_invalid);
+            validationErrorListener.emailError(ErrorCode.EMAIL_INVALID);
             return false;
 
         } else if (TextUtils.isEmpty(password)) {
 
-            validationErrorListener.passwordError(R.string.activity_login_enter_password);
+            validationErrorListener.passwordError(ErrorCode.ENTER_PASSWORD);
             return false;
 
         } else if (password.length() < 6) {
 
-            validationErrorListener.passwordError(R.string.activity_login_password_err);
+            validationErrorListener.passwordError(ErrorCode.PASSWORD_INVALID);
             return false;
 
         } else {

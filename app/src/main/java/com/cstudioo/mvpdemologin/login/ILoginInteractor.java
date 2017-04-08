@@ -1,5 +1,6 @@
 package com.cstudioo.mvpdemologin.login;
 
+import com.cstudioo.mvpdemologin.util.ErrorCode;
 import com.cstudioo.mvpdemologin.webservice.model.response.ResponseLogin;
 
 /**
@@ -14,13 +15,13 @@ public interface ILoginInteractor {
 
         void getUserData(ResponseLogin user);
 
-        void errorMsg(String msg);
+        void errorMsg(String errorMsg);
     }
 
     interface IValidationErrorListener {
 
-        void emailError(int msg);
+        void emailError(ErrorCode code);
 
-        void passwordError(int msg);
+        void passwordError(ErrorCode code);
     }
 }

@@ -3,7 +3,6 @@ package com.cstudioo.mvpdemologin.login;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +12,7 @@ import com.cstudioo.mvpdemologin.R;
 import com.cstudioo.mvpdemologin.base.BaseActivity;
 import com.cstudioo.mvpdemologin.home.HomeActivity;
 import com.cstudioo.mvpdemologin.util.Constant;
+import com.cstudioo.mvpdemologin.util.ErrorCode;
 import com.cstudioo.mvpdemologin.util.Utils;
 import com.cstudioo.mvpdemologin.webservice.model.response.ResponseLogin;
 
@@ -65,25 +65,29 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
     }
 
     @Override
-    public void setEmailError(int errRes) {
+    public void setEmailError(ErrorCode code) {
         if (etEmail != null) {
-            etEmail.setError(getResources().getString(errRes));
+            if(code.getId() == ErrorCode.ENTER_EMAIL.getId()) {
+                etEmail.setError(getResources().getString(R.string.activity_login_enter_email));
+            }else if (code.getId() == ErrorCode.EMAIL_INVALID.getId()){
+                etEmail.setError(getResources().getString(R.string.activity_login_email_invalid));
+            }
         }
     }
 
     @Override
-    public void setPasswordError(int errRes) {
+    public void setPasswordError(ErrorCode code) {
         if (etPassword != null) {
-            etPassword.setError(getResources().getString(errRes));
+            if(code.getId() == ErrorCode.ENTER_PASSWORD.getId()) {
+                etPassword.setError(getResources().getString(R.string.activity_login_enter_password));
+            }else if (code.getId() == ErrorCode.PASSWORD_INVALID.getId()){
+                etPassword.setError(getResources().getString(R.string.activity_login_password_err));
+            }
         }
     }
 
     @Override
     public void loginSuccess(ResponseLogin responseLogin) {
-        Log.e("loginSuccess", "Email : " + responseLogin.getEmail());
-        Log.e("loginSuccess", "User name : " + responseLogin.getNickname());
-        Log.e("loginSuccess", "User ID : " + responseLogin.getId());
-
         Intent openHomeScreen = new Intent(LoginActivity.this, HomeActivity.class);
         openHomeScreen.putExtra(Constant.PASS_TO_HOME_MSG, "This is HOME");
         startActivity(openHomeScreen);
@@ -91,14 +95,17 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
     }
 
     @Override
-    public void loginFailure(int errMsg) {
-        Toast.makeText(this, getResources().getString(errMsg), Toast.LENGTH_LONG).show();
+    public void loginFailure(ErrorCode errorCode) {
+        if(errorCode.getId() == 4) {
+            Toast.makeText(this, getResources().getString(R.string.activity_login_fail_msg), Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
     public void loginFailure(String errMsg) {
         Toast.makeText(this, errMsg, Toast.LENGTH_LONG).show();
     }
+
 
     @Override
     public void onClick(View view) {
